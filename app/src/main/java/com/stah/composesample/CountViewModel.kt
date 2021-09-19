@@ -2,8 +2,9 @@ package com.stah.composesample
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.ViewModel
 
-class CountViewModel {
+class CountViewModel : ViewModel(){
     val count: MutableState<Int> = mutableStateOf(0)
 
     fun onCountUpTapped() {
