@@ -8,15 +8,13 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 
 class MainActivity : ComponentActivity() {
+    private val viewModel: CountViewModel = CountViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CountUp()
+            CountUp(viewModel = viewModel)
         }
     }
 
@@ -26,14 +24,12 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun CountUp() {
-        var count: Int by remember {
-            mutableStateOf(0)
-        }
+    fun CountUp(viewModel: CountViewModel) {
+        val count: Int by viewModel.count
 
         Column {
             Text("$count")
-            Button(onClick = { count += 1 }) {
+            Button(onClick = { viewModel.onCountUpTapped() }) {
                 Text(text = "Count up")
             }
         }
